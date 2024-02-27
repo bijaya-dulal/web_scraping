@@ -1,6 +1,6 @@
 # project task                    
-1. Choose a website               sattus:active    remarks:
-2. web scrapping                  sattus:waiting   
+1. Choose a website               sattus:done    remarks: google.com cricket live score 
+2. web scrapping                  sattus:active  
 3. Data cleaning                  sattus:waiting   
 4. Data analysis                  sattus:waiting   
 5. Insights                       sattus:waiting   
