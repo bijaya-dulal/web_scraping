@@ -10,21 +10,26 @@ def scrape_cricket_scores():
     if response.status_code == 200:
         # Parse the HTML content using BeautifulSoup
         soup = BeautifulSoup(response.text, 'html.parser')
-        #print(soup)
+        
         # Find the elements containing the live cricket scores
         score_elements = soup.find_all('title')
-        print(score_elements)
-        #write to html
-        with open('livescore.html', 'w') as f:
-            f.write(str(soup))
-        # print(soup.prettify()) 
+        
+        # Create an HTML table to store the cricket scores
+        html_table = '<table border="1">'
+        html_table += '<tr><th>Match</th></tr>'
+
         # Extract and print the live cricket scores
         for score_element in score_elements:
-            #print(score_elements)
-            # Get the text content of the score element
             score_text = score_element.text.strip()
-           # print(score_text)
+            html_table += f'<tr><td>{score_text}</td></tr>'
+        
+        html_table += '</table>'
+
+        # Write the HTML table to a file
+        with open('livescore.html', 'w') as f:
+            f.write(html_table)
 
     else:
         print('Failed to fetch the live cricket scores. Status code:', response.status_code)
+
 scrape_cricket_scores()
