@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 import re
+from web_scraping.browser_open import open_html_in_browser
 
 def scrape_cricket_scores():
     # URL of the Google search page for live cricket scores
@@ -46,3 +47,6 @@ def scrape_cricket_scores():
         print('Failed to fetch the live cricket scores. Status code:', response.status_code)
 
 scrape_cricket_scores()
+
+# Call the function with the path to your HTML file
+open_html_in_browser('cricket_scores.html')
