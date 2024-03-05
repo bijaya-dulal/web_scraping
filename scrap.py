@@ -30,11 +30,12 @@ def scrape_cricket_scores():
                 scores.append(score)
 
         # Generate HTML table
-        html_table = '<table border="1">'
-        html_table += '<tr><th>Country1</th><th>Country2</th></tr>'
+        html_table = '<!DOCTYPE html>\n<html>\n<head>\n<title>Cricket Scores</title>\n<link rel="stylesheet" type="text/css" href="design.css">\n</head>\n<body>\n'
+        html_table += '<h1>Live Cricket Scores</h1>\n<table border="1">'
+        html_table += '<tr><th>Country 2</th><th>Country 2</th></tr>'
         for i in range(len(countries)):
             html_table += f'<tr><td>{countries[i]}</td><td>{scores[i]}</td></tr>'
-        html_table += '</table>'
+        html_table += '</table>\n</body>\n</html>'
 
         # Write HTML table to file
         with open('cricket_scores.html', 'w') as f:

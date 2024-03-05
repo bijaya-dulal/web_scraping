@@ -1,0 +1,39 @@
+/* styles.css */
+
+/* Style for the table */
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+/* Style for table header */
+th {
+    background-color: #4CAF50; /* Green */
+    color: white;
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+/* Style for table data */
+td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+/* Style for alternate rows */
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Hover effect */
+tr:hover {
+    background-color: #ddd;
+}
+
+/* Style for table header */
+h1 {
+    color: #333;
+    text-align: center;
+}
