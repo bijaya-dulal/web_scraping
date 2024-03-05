@@ -1,5 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
+import re
 
 def scrape_cricket_scores():
     # URL of the Google search page for live cricket scores
@@ -14,21 +15,32 @@ def scrape_cricket_scores():
         # Find the elements containing the live cricket scores
         score_elements = soup.find_all('title')
         
-        # Create an HTML table to store the cricket scores
-        html_table = '<table border="1">'
-        html_table += '<tr><th>Match</th></tr>'
-
-        # Extract and print the live cricket scores
+        # Extract country and score from each match
+        countries = []
+        scores = []
         for score_element in score_elements:
             score_text = score_element.text.strip()
-            html_table += f'<tr><td>{score_text}</td></tr>'
-        
+            
+            # Use regular expression to extract country and score
+            match = re.match(r'(.*) v (.*)', score_text)
+            if match:
+                country = match.group(1).strip()
+                score = match.group(2).strip()
+                countries.append(country)
+                scores.append(score)
+
+        # Generate HTML table
+        html_table = '<table border="1">'
+        html_table += '<tr><th>Country1</th><th>Country2</th></tr>'
+        for i in range(len(countries)):
+            html_table += f'<tr><td>{countries[i]}</td><td>{scores[i]}</td></tr>'
         html_table += '</table>'
 
-        # Write the HTML table to a file
-        with open('livescore.html', 'w') as f:
+        # Write HTML table to file
+        with open('cricket_scores.html', 'w') as f:
             f.write(html_table)
 
+        print("HTML table generated successfully.")
     else:
         print('Failed to fetch the live cricket scores. Status code:', response.status_code)
 
