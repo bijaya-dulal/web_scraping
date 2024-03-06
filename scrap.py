@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 import re
-from browser_open import open_html_in_browser
+
 
 def scrape_cricket_scores():
     # URL of the Google search page for live cricket scores
@@ -15,7 +15,9 @@ def scrape_cricket_scores():
         
         # Find the elements containing the live cricket scores
         score_elements = soup.find_all('title')
-        
+        pub_date_tag = soup.find('pubdate')
+        pub_date = pub_date_tag.text.strip()
+        print(pub_date_tag)
         # Extract country and score from each match
         countries = []
         scores = []
@@ -33,6 +35,7 @@ def scrape_cricket_scores():
         # Generate HTML table
         html_table = '<!DOCTYPE html>\n<html>\n<head>\n<title>Cricket Scores</title>\n<link rel="stylesheet" type="text/css" href="design.css">\n</head>\n<body>\n'
         html_table += '<h1>Live Cricket Scores</h1>\n<table border="1">'
+        html_table += f'<h4>Updated on: {pub_date}</h4>\n<table border="1">'
         html_table += '<tr><th>Country 1</th><th> VS </th><th>Country 2</th></tr>'
         for i in range(len(countries)):
             html_table += f'<tr><td>{countries[i]}</td><td> VS </td><td>{scores[i]}</td></tr>'
@@ -46,7 +49,4 @@ def scrape_cricket_scores():
     else:
         print('Failed to fetch the live cricket scores. Status code:', response.status_code)
 
-scrape_cricket_scores()
 
-# Call the function with the path to your HTML file
-open_html_in_browser('cricket_scores.html')
