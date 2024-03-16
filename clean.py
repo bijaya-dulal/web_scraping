@@ -1,23 +1,26 @@
 import re
 
-# Regular expression pattern to match the country name and score
-pattern = r'(.+)\s(\d+/\d+)'
+def clean_data(items):
+    # Regular expression pattern to extract the desired groups
+    pattern = r'(.+)\s(\d+/\d+)\s\*\sv\s(.+)\s(\d+/\d+)'
 
-def clean_data(data_list):
-    print("i have called")
-    for data in data_list:
-        match = re.match(pattern, data)
+    extracted_groups = []
+    
+    for content in items:
+        # Match the pattern against the content
+        match = re.match(pattern, content)
+
         if match:
-            country = match.group(1)
-            score = match.group(2)
-            print("Country:", country)
-            print("Score:", score)
+            # Extract the groups
+            group1 = match.group(1)
+            score1 = match.group(2)
+            group2 = match.group(3)
+            score2 = match.group(4)
+
+            # Append the extracted groups to the list
+            extracted_groups.append((group1, score1, group2, score2))
         else:
-            print(data,"yet to begin")
-        print()  # Add a newline between each data entry
-
-# Example list of data entries
-data_list = ["New Zealand 179/10", "Australia 383/10", "India 240/7"]
-
-# Call the clean_data function with the list of data
-#clean_data(data_list)
+            # Append None for items with no match
+            extracted_groups.append(None)
+    
+    return extracted_groups
