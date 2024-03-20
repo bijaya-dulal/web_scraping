@@ -1,26 +1,29 @@
 import re
 
-def clean_data(items):
-    # Regular expression pattern to extract the desired groups
-    pattern = r'(.+)\s(\d+/\d+)\s\*\sv\s(.+)\s(\d+/\d+)'
-
-    extracted_groups = []
+def clean_data(data):
+    # Split the data based on " v " (for versus)
+    parts = data.split(' v ')
+    if len(parts) != 2:
+        #print("Invalid data format:", data)
+        return None
     
-    for content in items:
-        # Match the pattern against the content
-        match = re.match(pattern, content)
-
-        if match:
-            # Extract the groups
-            group1 = match.group(1)
-            score1 = match.group(2)
-            group2 = match.group(3)
-            score2 = match.group(4)
-
-            # Append the extracted groups to the list
-            extracted_groups.append((group1, score1, group2, score2))
-        else:
-            # Append None for items with no match
-            extracted_groups.append(None)
+    # Extract group 1 and score 1
+    match1 = re.match(r'(.+?)\s(\d+/\d+)', parts[0])
+    if match1:
+        group1 = match1.group(1)
+        score1 = match1.group(2)
+    else:
+        #print("No match found for group 1:", parts[0])
+        return None
     
-    return extracted_groups
+    # Extract group 2 and score 2
+    match2 = re.match(r'(.+?)\s(\d+/\d+)', parts[1])
+    if match2:
+        group2 = match2.group(1)
+        score2 = match2.group(2)
+    else:
+        #print("No match found for group 2:", parts[1])
+        return None
+    
+    return (group1, score1, group2, score2)
+

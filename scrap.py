@@ -9,7 +9,8 @@ def scrape_cricket_scores():
     url = 'https://static.cricinfo.com/rss/livescores.xml'
     # Send a GET request to fetch the HTML content of the page
     response = requests.get(url)
-   
+    filtered_data=[]
+
     if response.status_code == 200:
         # Parse the HTML content using BeautifulSoup
         soup = BeautifulSoup(response.text, 'html.parser')
@@ -18,14 +19,15 @@ def scrape_cricket_scores():
         pub_date_tag = soup.find('pubdate')
         pub_date = pub_date_tag.text.strip()
         # Extract country and score from each match
- 
+        
        
         for score_element in score_elements:
             score_text = score_element.text.strip()
-            print(score_text)
-            filtered_data = clean_data(score_text)
+            cdata=clean_data(score_text)
+            if cdata:
+                filtered_data.append(cdata)
             
-      
+        print("filtered data")
         print(filtered_data)   
     
         # # Generate HTML table
