@@ -1,7 +1,7 @@
 # project task                    
 1. Choose a website               sattus:done    remarks: cric info
 2. web scrapping                  sattus:done 
-3. Data cleaning                  sattus:active   
-4. Data analysis                  sattus:waiting   
+3. Data cleaning                  sattus:done  
+4. Data analysis                  sattus:active  
 5. Insights                       sattus:waiting   
 6. Reporting and automation       sattus:waiting   
