@@ -27,21 +27,21 @@ def scrape_cricket_scores():
             if cdata:
                 filtered_data.append(cdata)
             
-        print("filtered data")
-        print(filtered_data)   
-    
-        # # Generate HTML table
-        # html_table = '<!DOCTYPE html>\n<html>\n<head>\n<title>Cricket Scores</title>\n<link rel="stylesheet" type="text/css" href="design.css">\n</head>\n<body>\n'
-        # html_table += '<h1>Live Cricket Scores</h1>\n<table border="1">'
-        # html_table += f'<h3>Updated on: {pub_date}</h3>\n<table border="1">'
-        # html_table += '<tr><th>Country 1</th><th> VS </th><th>Country 2</th></tr>'
-        # for i in range(len(countries1)):
-        #     html_table += f'<tr><td>{countries1[i]}</td><td> VS </td><td>{countries2[i]}</td></tr>'
-        # html_table += '</table>\n</body>\n</html>'
+       
+        # Generate HTML table
+        html_table = '<!DOCTYPE html>\n<html>\n<head>\n<title>Cricket Scores</title>\n<link rel="stylesheet" type="text/css" href="design.css">\n</head>\n<body>\n'
+        html_table += '<h1>Live Cricket Scores</h1>\n<table border="1">'
+        html_table += f'<h3>Updated on: {pub_date}</h3>\n<table border="1">'
+        html_table += '<tr><th>Country 1</th> <th> score </th> <th> VS </th><th>Country 2</th> <th> score </th><</tr>'
 
-        # # Write HTML table to file
-        # with open('cricket_scores.html', 'w') as f:clear
-        #     f.write(html_table)
+        for data in filtered_data:
+            group1, score1, group2, score2 = data
+            html_table += f'<tr><td>{group1}</td><td>{score1}</td><td> VS </td><td>{group2}</td><td>{score2}</td></tr>'
+        html_table += '</table>\n</body>\n</html>'
+
+        # Write HTML table to file
+        with open('cricket_scores.html', 'w') as f:
+            f.write(html_table)
 
         
     else:
